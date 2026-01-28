@@ -1,0 +1,41 @@
+body{
+    background-color:darkturquoise;
+    display: flex;
+}
+h1{
+    color: aqua;
+    text-transform: uppercase;
+    margin: 10px;
+}
+p{
+    font-size: 10;
+    color: blueviolet;
+}
+button{
+    background-color: cornflowerblue;
+    color: aliceblue;
+    border-radius: 50px;
+    padding: 10px 12px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: darkgray;
+}
+video{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid white;
+    object-fit: cover;
+    padding: 10px 12px;
+    margin: 50px;
+}
+
+.Recuadro{
+    width: 500px;
+    height: 500px;
+    background-color:black;
+    border-radius: 25%;
+    border: 5px solid white;
+    text-align: center;
+}

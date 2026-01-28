@@ -1,0 +1,6 @@
+html 		= huesos
+css 		= La piel (Estetica)
+JavaScrip	= 
+
+p	:	texto
+h1	:	Titulo
