@@ -1,236 +1,607 @@
+:root {
+    --bg-fondo: #0b0f17;
+    --bg-superficie: #121826;
+    --bg-elevado: #182032;
+    --borde-sutil: rgba(255, 255, 255, 0.09);
+    --borde-dorado: rgba(212, 175, 55, 0.35);
+    --texto-principal: #f8fafc;
+    --texto-secundario: #94a3b8;
+    --oro: #e5c158;
+    --oro-oscuro: #b89228;
+    --verde: #22c55e;
+    --verde-hover: #16a34a;
+    --gris: #334155;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #f4f6f9;
-    color: #333;
-    padding: 20px;
+    background-color: var(--bg-fondo);
+    color: var(--texto-principal);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+    padding: 28px 14px 90px;
 }
 
-header {
+.envoltorio {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+/* Encabezado elegante y minimalista */
+.encabezado {
+    background: var(--bg-superficie);
+    border: 1px solid var(--borde-sutil);
+    border-radius: 20px;
+    padding: 28px 22px;
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 18px;
 }
 
-header h1 {
-    color: #1a252f;
-    margin-bottom: 8px;
+.etiqueta-superior {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 1.4px;
+    font-weight: 700;
+    color: var(--oro);
+    border: 1px solid var(--borde-dorado);
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+}
+
+.encabezado h1 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+}
+
+.lead {
+    color: var(--texto-secundario);
+    font-size: 0.98rem;
+    max-width: 600px;
+    margin: 0 auto 22px;
+}
+
+.lead strong {
+    color: var(--texto-principal);
+}
+
+.marco-premio {
+    max-width: 310px;
+    margin: 0 auto 22px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--borde-dorado);
+    background: #0f172a;
+}
+
+.marco-premio img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.resumen-rapido {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    border-top: 1px solid var(--borde-sutil);
+    padding-top: 18px;
+}
+
+.dato-resumen {
+    background: var(--bg-elevado);
+    border: 1px solid var(--borde-sutil);
+    border-radius: 12px;
+    padding: 12px 10px;
+}
+
+.dato-resumen span {
+    display: block;
+    font-size: 0.76rem;
+    color: var(--texto-secundario);
+    margin-bottom: 3px;
+}
+
+.dato-resumen strong {
+    font-size: 1rem;
+    color: var(--oro);
+}
+
+/* Reglas y dinámica */
+.reglas-card {
+    background: var(--bg-superficie);
+    border: 1px solid var(--borde-sutil);
+    border-radius: 20px;
+    padding: 24px 22px;
+    margin-bottom: 18px;
+}
+
+.reglas-card h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--texto-principal);
+}
+
+.lista-reglas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.lista-reglas li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 0.93rem;
+    color: #cbd5e1;
+}
+
+.lista-reglas li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--oro);
+}
+
+.lista-reglas strong {
+    color: var(--texto-principal);
+}
+
+.cierre-reglas {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    background: var(--bg-elevado);
+    border-left: 3px solid var(--oro);
+    padding: 12px 14px;
+    border-radius: 0 10px 10px 0;
+}
+
+.cierre-reglas strong {
+    color: var(--texto-principal);
+}
+
+/* Barra superior de selección */
+.barra-seleccion {
+    background: var(--bg-superficie);
+    border: 1px solid var(--borde-sutil);
+    border-radius: 16px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
 }
 
 .leyenda {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 12px;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 0.84rem;
+    color: var(--texto-secundario);
 }
 
-.badge {
-    padding: 5px 12px;
-    border-radius: 6px;
+.item-leyenda {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.punto {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.punto.verde { background: var(--verde); }
+.punto.dorado { background: var(--oro); }
+.punto.gris { background: var(--gris); }
+
+.resumen-seleccion {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     font-size: 0.9rem;
-    font-weight: bold;
-    color: white;
 }
 
-.badge.disponible {
-    background-color: #28a745;
+#total-pagar {
+    color: var(--oro);
+    font-size: 1rem;
 }
 
-.badge.vendido {
-    background-color: #9e9e9e;
+/* Decenas / Mini-rifas */
+.contenedor-decenas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-/* Cuadrícula de 100 boletos */
-.grid-boletos {
+.fila-decena {
+    border-radius: 16px;
+    padding: 12px 14px;
+    border: 1px solid var(--borde-sutil);
+}
+
+/* Rectángulos/fondos sutiles alternados por decena */
+.fila-decena.tono-a {
+    background: linear-gradient(180deg, rgba(24, 32, 50, 0.95), rgba(15, 23, 42, 0.95));
+    border-left: 3px solid rgba(229, 193, 88, 0.55);
+}
+
+.fila-decena.tono-b {
+    background: linear-gradient(180deg, rgba(19, 29, 46, 0.95), rgba(12, 18, 32, 0.95));
+    border-left: 3px solid rgba(148, 163, 184, 0.35);
+}
+
+.cabecera-decena {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 9px;
+    font-size: 0.8rem;
+}
+
+.titulo-mini-rifa {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--oro);
+}
+
+.rango-numeros {
+    color: var(--texto-secundario);
+    font-weight: 500;
+}
+
+.grid-decena {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
-    gap: 10px;
-    max-width: 700px;
-    margin: 0 auto;
+    gap: 6px;
 }
 
 .boleto {
     aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 8px;
     border: none;
-    color: white;
-    transition: transform 0.15s ease, background-color 0.2s ease;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: transform 0.14s ease, background-color 0.16s ease, box-shadow 0.16s ease;
 }
 
+/* Disponible -> Verde */
 .boleto.disponible {
-    background-color: #28a745;
+    background-color: var(--verde);
+    color: #052e16;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(40, 167, 69, 0.3);
 }
 
 .boleto.disponible:hover {
-    background-color: #218838;
-    transform: scale(1.06);
+    background-color: var(--verde-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
 }
 
+/* Seleccionado por el usuario -> Dorado elegante */
+.boleto.seleccionado {
+    background-color: var(--oro);
+    color: #111827;
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 2px rgba(229, 193, 88, 0.45);
+}
+
+/* Vendido / Apartado -> Gris */
 .boleto.vendido {
-    background-color: #9e9e9e;
-    color: #e0e0e0;
+    background-color: var(--gris);
+    color: #64748b;
     cursor: not-allowed;
     text-decoration: line-through;
+}
+
+/* Botones */
+.btn-principal {
+    background: var(--oro);
+    color: #0b0f17;
+    border: none;
+    border-radius: 10px;
+    padding: 9px 16px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.btn-principal:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+.btn-principal:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.btn-texto {
+    background: transparent;
+    color: var(--texto-secundario);
+    border: 1px solid var(--borde-sutil);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.btn-texto:hover {
+    color: var(--texto-principal);
+}
+
+/* Barra flotante */
+.barra-flotante {
+    position: fixed;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 28px);
+    max-width: 750px;
+    background: rgba(18, 24, 38, 0.96);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--borde-dorado);
+    border-radius: 16px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.55);
+    z-index: 900;
+}
+
+.barra-flotante span {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--texto-secundario);
+}
+
+.barra-flotante strong {
+    font-size: 1.05rem;
+    color: var(--oro);
+}
+
+.flotante-acciones {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.oculto {
+    display: none !important;
 }
 
 /* Modal */
 .modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    inset: 0;
+    background: rgba(3, 6, 12, 0.78);
+    backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px;
+    padding: 16px;
     z-index: 1000;
 }
 
-.modal.oculto {
-    display: none;
-}
-
-.modal-contenido {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    max-width: 450px;
+.modal-caja {
+    background: var(--bg-superficie);
+    border: 1px solid var(--borde-dorado);
+    border-radius: 20px;
     width: 100%;
+    max-width: 440px;
+    padding: 24px 20px;
     position: relative;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.cerrar {
+.btn-cerrar {
     position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #666;
+    top: 14px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--texto-secundario);
+    font-size: 26px;
+    line-height: 1;
     cursor: pointer;
 }
 
-.cerrar:hover {
-    color: #000;
+.btn-cerrar:hover {
+    color: var(--texto-principal);
 }
 
-.modal-contenido h2 {
-    margin-bottom: 15px;
-    color: #1a252f;
+.etiqueta-modal {
+    font-size: 0.7rem;
+    letter-spacing: 1.2px;
+    color: var(--oro);
+    font-weight: 700;
 }
 
-#numero-seleccionado {
-    color: #28a745;
+.modal-caja h2 {
+    font-size: 1.35rem;
+    margin: 4px 0 14px;
 }
 
-.campo-nombre {
-    margin-bottom: 18px;
+.resumen-modal {
+    background: var(--bg-elevado);
+    border: 1px solid var(--borde-sutil);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
 }
 
-.campo-nombre label {
+.resumen-modal p {
+    margin-bottom: 6px;
+    color: #cbd5e1;
+}
+
+.resumen-modal p:last-child {
+    margin-bottom: 0;
+}
+
+.total-destacado strong,
+.total-destacado span {
+    color: var(--oro);
+    font-size: 1rem;
+}
+
+.campo {
+    margin-bottom: 16px;
+}
+
+.campo label {
     display: block;
-    font-weight: 600;
+    font-size: 0.86rem;
+    color: var(--texto-secundario);
     margin-bottom: 6px;
 }
 
-.campo-nombre input {
+.campo input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
+    padding: 11px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--borde-sutil);
+    background: var(--bg-elevado);
+    color: var(--texto-principal);
+    font-size: 0.95rem;
+    outline: none;
 }
 
-.datos-bancarios {
-    background-color: #f0f4f8;
-    border-left: 4px solid #004481; /* Azul BBVA */
-    padding: 15px;
-    border-radius: 6px;
-    margin-bottom: 20px;
+.campo input:focus {
+    border-color: var(--oro);
 }
 
-.datos-bancarios h3 {
-    font-size: 1rem;
-    color: #004481;
+.banco-box {
+    background: var(--bg-elevado);
+    border: 1px solid var(--borde-sutil);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 18px;
+}
+
+.banco-box h3 {
+    font-size: 0.92rem;
+    color: var(--oro);
     margin-bottom: 8px;
 }
 
-.datos-bancarios p {
-    font-size: 0.92rem;
+.banco-box p {
+    font-size: 0.88rem;
     margin-bottom: 5px;
+    color: #e2e8f0;
 }
 
-.acciones-pago {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
+.banco-box code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 0.92rem;
+    color: var(--oro);
 }
 
-.btn-secundario, .btn-banco {
-    flex: 1;
-    padding: 8px 10px;
-    font-size: 0.85rem;
-    text-align: center;
-    border-radius: 6px;
-    cursor: pointer;
-    text-decoration: none;
+.btn-copiar {
+    width: 100%;
+    margin-top: 10px;
+    padding: 9px;
+    border-radius: 9px;
+    border: 1px solid var(--borde-dorado);
+    background: transparent;
+    color: var(--oro);
     font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
 }
 
-.btn-secundario {
-    background-color: #e2e8f0;
-    color: #1e293b;
-    border: 1px solid #cbd5e1;
-}
-
-.btn-secundario:hover {
-    background-color: #cbd5e1;
-}
-
-.btn-banco {
-    background-color: #004481;
-    color: white;
-}
-
-.btn-banco:hover {
-    background-color: #003366;
+.btn-copiar:hover {
+    background: rgba(229, 193, 88, 0.1);
 }
 
 .btn-whatsapp {
     display: block;
     width: 100%;
-    background-color: #25d366;
-    color: white;
     text-align: center;
-    padding: 14px;
-    border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background-color 0.2s;
+    background: #22c55e;
+    color: #052e16;
+    font-weight: 800;
+    font-size: 0.96rem;
+    padding: 13px;
+    border-radius: 11px;
+    transition: background-color 0.2s ease;
 }
 
 .btn-whatsapp:hover {
-    background-color: #1ebe5d;
+    background: #16a34a;
+    color: #ffffff;
 }
 
-/* Responsivo para celulares */
+/* Adaptación para teléfonos */
 @media (max-width: 600px) {
-    .grid-boletos {
-        grid-template-columns: repeat(5, 1fr);
+    body {
+        padding: 16px 10px 95px;
+    }
+
+    .encabezado,
+    .reglas-card {
+        padding: 20px 15px;
+        border-radius: 16px;
+    }
+
+    .encabezado h1 {
+        font-size: 1.45rem;
+    }
+
+    .resumen-rapido {
+        grid-template-columns: 1fr;
         gap: 8px;
+    }
+
+    .barra-seleccion {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .resumen-seleccion {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .fila-decena {
+        padding: 10px 8px;
+    }
+
+    .grid-decena {
+        gap: 3px;
+    }
+
+    .boleto {
+        font-size: 0.76rem;
+        border-radius: 6px;
+    }
+
+    .cabecera-decena {
+        font-size: 0.72rem;
     }
 }
