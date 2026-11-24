@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnWhatsapp = document.getElementById("btn-whatsapp");
     const btnCopiar = document.getElementById("btn-copiar");
 
-    // BOLETOS VENDIDOS / APARTADOS (números del 1 al 100): ej. [1, 5, 23]
-    const boletosVendidosIniciales = [];
+    // BOLETOS VENDIDOS / APARTADOS
+    const boletosVendidosIniciales = [1,11,21,31,55];
 
     let boletosOcupados = [...boletosVendidosIniciales];
     let boletosSeleccionados = [];
