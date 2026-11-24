@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnCopiar = document.getElementById("btn-copiar");
 
     // 1. BOLETOS VENDIDOS
-    const boletosVendidosIniciales = [2,5,20];
+    const boletosVendidosIniciales = [2,5,20,33,34];
 
     // 2. BOLETOS GANADORES 
     const boletosGanadores = [6,5];
