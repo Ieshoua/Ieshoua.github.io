@@ -9,13 +9,14 @@
 <body>
 
     <div class="envoltorio">
+        <!-- Encabezado y presentación del premio -->
         <header class="encabezado">
             <span class="etiqueta-superior">EDICIÓN ESPECIAL • $50 POR BOLETO</span>
             <h1>🎧 ¡Gran Rifa de Audífonos! 🎶</h1>
             <p class="lead">¡Participa por solo <strong>$50 pesos</strong>! No dejes pasar la oportunidad de ganarte estos increíbles audífonos. La dinámica está diseñada para que tengas más posibilidades de llegar hasta el último sorteo.</p>
 
             <div class="marco-premio">
-                <img src="premio.png" alt="Audífonos inalámbricos en su estuche y caja">
+                <img src="premio.jpg" alt="Audífonos inalámbricos en su estuche y caja">
             </div>
 
             <div class="resumen-rapido">
@@ -56,21 +57,30 @@
             </p>
         </section>
 
-        <!-- Apartado de Links de Sorteos -->
-        <section class="sorteos-card" aria-label="Links de los sorteos en vivo">
+        <!-- Link único del sorteo -->
+        <section class="sorteos-card" aria-label="Link del sorteo">
             <div class="sorteos-header">
-                <h2>🎟️ Links de los Sorteos</h2>
-                <span class="sorteos-sub">Haz clic en un sorteo activo para ver la proyección</span>
+                <h2>🎟️ Link del Sorteo</h2>
+                <span class="sorteos-sub">Proyección oficial en vivo</span>
             </div>
-            <div id="grid-links-sorteos" class="grid-links-sorteos">
-            </div>
+            <a
+                href="https://www.veamoslasfotos.app/projection/sorteo?eventId=6afc98d49d574b4cbe94a185&id=6b05e2a1a529fb1c23bfa5eb"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ticket-sorteo activo unico-sorteo"
+            >
+                <span class="ticket-titulo">Ver proyección del sorteo</span>
+                <span class="ticket-estado">Abrir enlace ↗</span>
+            </a>
         </section>
 
+        <!-- Barra de estado y selección múltiple -->
         <section class="barra-seleccion">
             <div class="leyenda">
                 <span class="item-leyenda"><i class="punto verde"></i> Disponible</span>
                 <span class="item-leyenda"><i class="punto dorado"></i> Seleccionado</span>
                 <span class="item-leyenda"><i class="punto gris"></i> Apartado</span>
+                <span class="item-leyenda">👑 Ganador</span>
             </div>
 
             <div class="resumen-seleccion">
@@ -80,10 +90,13 @@
             </div>
         </section>
 
+        <!-- 10 Decenas / Mini-rifas (1 al 100) -->
         <main id="contenedor-decenas" class="contenedor-decenas">
+            <!-- Generado con JavaScript -->
         </main>
     </div>
 
+    <!-- Barra flotante inferior cuando hay boletos seleccionados -->
     <div id="barra-flotante" class="barra-flotante oculto">
         <div>
             <span id="flotante-cantidad">0 boletos</span>
