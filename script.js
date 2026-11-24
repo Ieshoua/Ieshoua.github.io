@@ -2,6 +2,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const PRECIO_BOLETO = 50;
     const TELEFONO_WHATSAPP = "526141160875";
 
+    // CONFIGURACIÓN DE LINKS DE SORTEOS
+    // Pega cada URL dentro de las comillas conforme vayas creando cada sorteo
+    const LINKS_SORTEOS = [
+        {
+            titulo: "Sorteo 1",
+            subtitulo: "Boletos 1–10",
+            url: "https://www.veamoslasfotos.app/projection/sorteo?eventId=6afc98d49d574b4cbe94a185&id=6afc99c19d574b4cbe94c12f"
+        },
+        { titulo: "Sorteo 2", subtitulo: "Boletos 11–20", url: "" },
+        { titulo: "Sorteo 3", subtitulo: "Boletos 21–30", url: "" },
+        { titulo: "Sorteo 4", subtitulo: "Boletos 31–40", url: "" },
+        { titulo: "Sorteo 5", subtitulo: "Boletos 41–50", url: "" },
+        { titulo: "Sorteo 6", subtitulo: "Boletos 51–60", url: "" },
+        { titulo: "Sorteo 7", subtitulo: "Boletos 61–70", url: "" },
+        { titulo: "Sorteo 8", subtitulo: "Boletos 71–80", url: "" },
+        { titulo: "Sorteo 9", subtitulo: "Boletos 81–90", url: "" },
+        { titulo: "Sorteo 10", subtitulo: "Boletos 91–100", url: "" },
+        { titulo: "🏆 Gran Sorteo Final", subtitulo: "Los 10 finalistas", url: "", esGranSorteo: true }
+    ];
+
+    const gridLinksSorteos = document.getElementById("grid-links-sorteos");
     const contenedorDecenas = document.getElementById("contenedor-decenas");
     const contadorBoletosEl = document.getElementById("contador-boletos");
     const totalPagarEl = document.getElementById("total-pagar");
@@ -22,15 +43,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnWhatsapp = document.getElementById("btn-whatsapp");
     const btnCopiar = document.getElementById("btn-copiar");
 
-    // Todos inician disponibles (vacío). Agrega aquí números ya apartados manualmente si lo deseas.
+    // Todos los boletos (1 al 100) inician disponibles.
+    // Si luego quieres marcar alguno apartado manualmente para todos, agrégalo aquí: ej. [5, 24, 100]
     const boletosVendidosIniciales = [];
-    let boletosOcupados = JSON.parse(localStorage.getItem("boletosOcupados")) || boletosVendidosIniciales;
+    let boletosOcupados = JSON.parse(localStorage.getItem("boletosOcupados_1_100")) || boletosVendidosIniciales;
 
-    // Arreglo de boletos elegidos en la selección actual
+    // Arreglo de números elegidos en la selección actual
     let boletosSeleccionados = [];
 
-    function obtenerNumeroRifa(numeroStr) {
-        return parseInt(numeroStr[0], 10) + 1;
+    // Calcula a qué Mini-Rifa pertenece cada boleto del 1 al 100 (1-10 -> Rifa 1, 11-20 -> Rifa 2, ..., 91-100 -> Rifa 10)
+    function obtenerNumeroRifa(numero) {
+        return Math.ceil(numero / 10);
+    }
+
+    function renderizarLinksSorteos() {
+        gridLinksSorteos.innerHTML = "";
+
+        LINKS_SORTEOS.forEach((sorteo) => {
+            const tieneLink = Boolean(sorteo.url && sorteo.url.trim() !== "");
+            const elemento = document.createElement(tieneLink ? "a" : "div");
+
+            elemento.classList.add("ticket-sorteo", tieneLink ? "activo" : "pendiente");
+            if (sorteo.esGranSorteo) {
+                elemento.classList.add("gran-sorteo");
+            }
+
+            if (tieneLink) {
+                elemento.href = sorteo.url;
+                elemento.target = "_blank";
+                elemento.rel = "noopener noreferrer";
+                elemento.title = `Abrir proyección: ${sorteo.titulo}`;
+            }
+
+            elemento.innerHTML = `
+                <span class="ticket-titulo">${sorteo.titulo}</span>
+                <span class="ticket-estado">${tieneLink ? "Ver sorteo ↗" : `${sorteo.subtitulo} • Próximamente`}</span>
+            `;
+
+            gridLinksSorteos.appendChild(elemento);
+        });
     }
 
     function renderizarCuadricula() {
@@ -38,8 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         for (let decena = 0; decena < 10; decena++) {
             const numeroRifa = decena + 1;
-            const inicio = (decena * 10).toString().padStart(2, "0");
-            const fin = (decena * 10 + 9).toString().padStart(2, "0");
+            const inicio = decena * 10 + 1;
+            const fin = (decena + 1) * 10;
 
             const filaDiv = document.createElement("div");
             filaDiv.classList.add("fila-decena", decena % 2 === 0 ? "tono-a" : "tono-b");
@@ -48,34 +99,31 @@ document.addEventListener("DOMContentLoaded", () => {
             cabecera.classList.add("cabecera-decena");
             cabecera.innerHTML = `
                 <span class="titulo-mini-rifa">MINI-RIFA #${numeroRifa}</span>
-                <span class="rango-numeros">Decena ${inicio} – ${fin}</span>
+                <span class="rango-numeros">Boletos del ${inicio} al ${fin}</span>
             `;
             filaDiv.appendChild(cabecera);
 
             const grid = document.createElement("div");
             grid.classList.add("grid-decena");
 
-            for (let unidad = 0; unidad < 10; unidad++) {
-                const num = decena * 10 + unidad;
-                const numStr = num.toString().padStart(2, "0");
-
+            for (let num = inicio; num <= fin; num++) {
                 const btn = document.createElement("button");
                 btn.type = "button";
-                btn.textContent = numStr;
+                btn.textContent = num;
                 btn.classList.add("boleto");
 
-                if (boletosOcupados.includes(numStr)) {
+                if (boletosOcupados.includes(num)) {
                     btn.classList.add("vendido");
                     btn.disabled = true;
-                    btn.title = `Boleto #${numStr} no disponible`;
-                } else if (boletosSeleccionados.includes(numStr)) {
+                    btn.title = `Boleto #${num} no disponible`;
+                } else if (boletosSeleccionados.includes(num)) {
                     btn.classList.add("seleccionado");
-                    btn.title = `Boleto #${numStr} seleccionado (clic para quitar)`;
-                    btn.addEventListener("click", () => alternarSeleccion(numStr));
+                    btn.title = `Boleto #${num} seleccionado (clic para quitar)`;
+                    btn.addEventListener("click", () => alternarSeleccion(num));
                 } else {
                     btn.classList.add("disponible");
-                    btn.title = `Mini-Rifa #${numeroRifa} • Boleto #${numStr} ($${PRECIO_BOLETO} MXN)`;
-                    btn.addEventListener("click", () => alternarSeleccion(numStr));
+                    btn.title = `Mini-Rifa #${numeroRifa} • Boleto #${num} ($${PRECIO_BOLETO} MXN)`;
+                    btn.addEventListener("click", () => alternarSeleccion(num));
                 }
 
                 grid.appendChild(btn);
@@ -86,12 +134,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function alternarSeleccion(numStr) {
-        if (boletosSeleccionados.includes(numStr)) {
-            boletosSeleccionados = boletosSeleccionados.filter((n) => n !== numStr);
+    function alternarSeleccion(num) {
+        if (boletosSeleccionados.includes(num)) {
+            boletosSeleccionados = boletosSeleccionados.filter((n) => n !== num);
         } else {
-            boletosSeleccionados.push(numStr);
-            boletosSeleccionados.sort();
+            boletosSeleccionados.push(num);
+            boletosSeleccionados.sort((a, b) => a - b);
         }
         actualizarResumenSeleccion();
         renderizarCuadricula();
@@ -167,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 boletosOcupados.push(num);
             }
         });
-        localStorage.setItem("boletosOcupados", JSON.stringify(boletosOcupados));
+        localStorage.setItem("boletosOcupados_1_100", JSON.stringify(boletosOcupados));
         boletosSeleccionados = [];
         actualizarResumenSeleccion();
         renderizarCuadricula();
@@ -191,6 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    renderizarLinksSorteos();
     actualizarResumenSeleccion();
     renderizarCuadricula();
 });
