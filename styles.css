@@ -1,57 +1,236 @@
 * {
-    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.Cajita1 {
-    width: 400px;
-    height: 500px;
-    background-color: #0527FF;
-    border-radius: 20px;
-    box-shadow: 0px 10px 10px grey;
-    text-shadow: 2px;
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    padding: 20px;
 }
 
-.Cajita1_1 {
-    height: 40%;
-    width: 100%;
-    border-radius: 20px 20px 0px 0px;
-    background-color: #05A3FF;
-    position: relative;
+header {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-img {
-    border-radius: 50%;
+header h1 {
+    color: #1a252f;
+    margin-bottom: 8px;
+}
+
+.leyenda {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 12px;
+}
+
+.badge {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: white;
+}
+
+.badge.disponible {
+    background-color: #28a745;
+}
+
+.badge.vendido {
+    background-color: #9e9e9e;
+}
+
+/* Cuadrícula de 100 boletos */
+.grid-boletos {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 10px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.boleto {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.boleto.disponible {
+    background-color: #28a745;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(40, 167, 69, 0.3);
+}
+
+.boleto.disponible:hover {
+    background-color: #218838;
+    transform: scale(1.06);
+}
+
+.boleto.vendido {
+    background-color: #9e9e9e;
+    color: #e0e0e0;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    z-index: 1000;
 }
 
-.Circulote {
-    width: 100px;
-    height: 100px;
-    background-color: grey;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 5px solid white;
+.modal.oculto {
+    display: none;
+}
+
+.modal-contenido {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cerrar {
     position: absolute;
-    bottom: -50px;
-    left: 50%;
-    transform:  translateX(-50%);
+    top: 12px;
+    right: 18px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
 }
-.eltexto {
-    padding: 50px;
+
+.cerrar:hover {
+    color: #000;
 }
-H1{
-    color: aliceblue;
+
+.modal-contenido h2 {
+    margin-bottom: 15px;
+    color: #1a252f;
 }
-h2{
-    color:darkgrey;
+
+#numero-seleccionado {
+    color: #28a745;
+}
+
+.campo-nombre {
+    margin-bottom: 18px;
+}
+
+.campo-nombre label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.campo-nombre input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.datos-bancarios {
+    background-color: #f0f4f8;
+    border-left: 4px solid #004481; /* Azul BBVA */
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.datos-bancarios h3 {
+    font-size: 1rem;
+    color: #004481;
+    margin-bottom: 8px;
+}
+
+.datos-bancarios p {
+    font-size: 0.92rem;
+    margin-bottom: 5px;
+}
+
+.acciones-pago {
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
+    margin-top: 12px;
 }
-p{
-    color: gainsboro;
+
+.btn-secundario, .btn-banco {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
 }
-#LINKS{
-    display: flex;
-    justify-content: space-between;
+
+.btn-secundario {
+    background-color: #e2e8f0;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+}
+
+.btn-secundario:hover {
+    background-color: #cbd5e1;
+}
+
+.btn-banco {
+    background-color: #004481;
+    color: white;
+}
+
+.btn-banco:hover {
+    background-color: #003366;
+}
+
+.btn-whatsapp {
+    display: block;
+    width: 100%;
+    background-color: #25d366;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebe5d;
+}
+
+/* Responsivo para celulares */
+@media (max-width: 600px) {
+    .grid-boletos {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+    }
 }
