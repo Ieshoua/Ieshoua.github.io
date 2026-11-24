@@ -2,25 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const PRECIO_BOLETO = 50;
     const TELEFONO_WHATSAPP = "526141160875";
 
-    const LINKS_SORTEOS = [
-        {
-            titulo: "Sorteo 1",
-            subtitulo: "Boletos 1–10",
-            url: "https://www.veamoslasfotos.app/projection/sorteo?eventId=6afc98d49d574b4cbe94a185&id=6afc99c19d574b4cbe94c12f"
-        },
-        { titulo: "Sorteo 2", subtitulo: "Boletos 11–20", url: "" },
-        { titulo: "Sorteo 3", subtitulo: "Boletos 21–30", url: "" },
-        { titulo: "Sorteo 4", subtitulo: "Boletos 31–40", url: "" },
-        { titulo: "Sorteo 5", subtitulo: "Boletos 41–50", url: "" },
-        { titulo: "Sorteo 6", subtitulo: "Boletos 51–60", url: "" },
-        { titulo: "Sorteo 7", subtitulo: "Boletos 61–70", url: "" },
-        { titulo: "Sorteo 8", subtitulo: "Boletos 71–80", url: "" },
-        { titulo: "Sorteo 9", subtitulo: "Boletos 81–90", url: "" },
-        { titulo: "Sorteo 10", subtitulo: "Boletos 91–100", url: "" },
-        { titulo: "🏆 Gran Sorteo Final", subtitulo: "Los 10 finalistas", url: "", esGranSorteo: true }
-    ];
-
-    const gridLinksSorteos = document.getElementById("grid-links-sorteos");
     const contenedorDecenas = document.getElementById("contenedor-decenas");
     const contadorBoletosEl = document.getElementById("contador-boletos");
     const totalPagarEl = document.getElementById("total-pagar");
@@ -41,44 +22,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnWhatsapp = document.getElementById("btn-whatsapp");
     const btnCopiar = document.getElementById("btn-copiar");
 
-    // marcar boletos
-    const boletosVendidosIniciales = [1,2,3];
-    let boletosOcupados = JSON.parse(localStorage.getItem("boletosOcupados_1_100")) || boletosVendidosIniciales;
+    // 1. BOLETOS VENDIDOS / APARTADOS (números del 1 al 100): ej. [1, 5, 23]
+    const boletosVendidosIniciales = [];
 
-    // Arreglo de números elegidos en la selección actual
+    // 2. BOLETOS GANADORES (números del 1 al 100): agrega aquí los ganadores para mostrarles 👑
+    // Ejemplo: const boletosGanadores = [7, 19, 84];
+    const boletosGanadores = [];
+
+    let boletosOcupados = JSON.parse(localStorage.getItem("boletosOcupados_1_100")) || boletosVendidosIniciales;
     let boletosSeleccionados = [];
 
-    // Calcula a qué Mini-Rifa pertenece cada boleto del 1 al 100 (1-10 -> Rifa 1, 11-20 -> Rifa 2, ..., 91-100 -> Rifa 10)
-    function obtenerNumeroRifa(numero) {
-        return Math.ceil(numero / 10);
+    function esGanador(num) {
+        return boletosGanadores.includes(num);
     }
 
-    function renderizarLinksSorteos() {
-        gridLinksSorteos.innerHTML = "";
-
-        LINKS_SORTEOS.forEach((sorteo) => {
-            const tieneLink = Boolean(sorteo.url && sorteo.url.trim() !== "");
-            const elemento = document.createElement(tieneLink ? "a" : "div");
-
-            elemento.classList.add("ticket-sorteo", tieneLink ? "activo" : "pendiente");
-            if (sorteo.esGranSorteo) {
-                elemento.classList.add("gran-sorteo");
-            }
-
-            if (tieneLink) {
-                elemento.href = sorteo.url;
-                elemento.target = "_blank";
-                elemento.rel = "noopener noreferrer";
-                elemento.title = `Abrir proyección: ${sorteo.titulo}`;
-            }
-
-            elemento.innerHTML = `
-                <span class="ticket-titulo">${sorteo.titulo}</span>
-                <span class="ticket-estado">${tieneLink ? "Ver sorteo ↗" : `${sorteo.subtitulo} • Próximamente`}</span>
-            `;
-
-            gridLinksSorteos.appendChild(elemento);
-        });
+    function obtenerNumeroRifa(numero) {
+        return Math.ceil(numero / 10);
     }
 
     function renderizarCuadricula() {
@@ -106,18 +65,28 @@ document.addEventListener("DOMContentLoaded", () => {
             for (let num = inicio; num <= fin; num++) {
                 const btn = document.createElement("button");
                 btn.type = "button";
-                btn.textContent = num;
                 btn.classList.add("boleto");
 
-                if (boletosOcupados.includes(num)) {
+                if (esGanador(num)) {
+                    btn.classList.add("ganador");
+                    btn.disabled = true;
+                    btn.title = `👑 Boleto #${num} Ganador`;
+                    btn.innerHTML = `
+                        <span class="corona-boleto" aria-hidden="true">👑</span>
+                        <span class="numero-boleto">${num}</span>
+                    `;
+                } else if (boletosOcupados.includes(num)) {
+                    btn.textContent = num;
                     btn.classList.add("vendido");
                     btn.disabled = true;
                     btn.title = `Boleto #${num} no disponible`;
                 } else if (boletosSeleccionados.includes(num)) {
+                    btn.textContent = num;
                     btn.classList.add("seleccionado");
                     btn.title = `Boleto #${num} seleccionado (clic para quitar)`;
                     btn.addEventListener("click", () => alternarSeleccion(num));
                 } else {
+                    btn.textContent = num;
                     btn.classList.add("disponible");
                     btn.title = `Mini-Rifa #${numeroRifa} • Boleto #${num} ($${PRECIO_BOLETO} MXN)`;
                     btn.addEventListener("click", () => alternarSeleccion(num));
@@ -132,6 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function alternarSeleccion(num) {
+        if (esGanador(num) || boletosOcupados.includes(num)) return;
+
         if (boletosSeleccionados.includes(num)) {
             boletosSeleccionados = boletosSeleccionados.filter((n) => n !== num);
         } else {
@@ -236,7 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    renderizarLinksSorteos();
     actualizarResumenSeleccion();
     renderizarCuadricula();
 });
