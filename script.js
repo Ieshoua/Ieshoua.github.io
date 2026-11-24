@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const PRECIO_BOLETO = 50;
     const TELEFONO_WHATSAPP = "526141160875";
 
-    // CONFIGURACIÓN DE LINKS DE SORTEOs
-    // Pega cada URL dentro de las comillas conforme vayas creando cada sorteo
     const LINKS_SORTEOS = [
         {
             titulo: "Sorteo 1",
@@ -43,9 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnWhatsapp = document.getElementById("btn-whatsapp");
     const btnCopiar = document.getElementById("btn-copiar");
 
-    // Todos los boletos (1 al 100) inician disponibles.
-    // Si luego quieres marcar alguno apartado manualmente para todos, agrégalo aquí: ej. [5, 24, 100]
-    const boletosVendidosIniciales = [];
+    // marcar boletos
+    const boletosVendidosIniciales = [1,2,3];
     let boletosOcupados = JSON.parse(localStorage.getItem("boletosOcupados_1_100")) || boletosVendidosIniciales;
 
     // Arreglo de números elegidos en la selección actual
