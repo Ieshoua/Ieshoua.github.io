@@ -22,12 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnWhatsapp = document.getElementById("btn-whatsapp");
     const btnCopiar = document.getElementById("btn-copiar");
 
-    // 1. BOLETOS VENDIDOS / APARTADOS (números del 1 al 100): ej. [1, 5, 23]
-    const boletosVendidosIniciales = [];
+    // 1. BOLETOS VENDIDOS
+    const boletosVendidosIniciales = [2,5,20];
 
-    // 2. BOLETOS GANADORES (números del 1 al 100): agrega aquí los ganadores para mostrarles 👑
-    // Ejemplo: const boletosGanadores = [7, 19, 84];
-    const boletosGanadores = [];
+    // 2. BOLETOS GANADORES 
+    const boletosGanadores = [6,5];
 
     let boletosOcupados = JSON.parse(localStorage.getItem("boletosOcupados_1_100")) || boletosVendidosIniciales;
     let boletosSeleccionados = [];
