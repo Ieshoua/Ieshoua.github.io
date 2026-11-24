@@ -26,7 +26,7 @@
                 </div>
                 <div class="dato-resumen">
                     <span>Total de boletos</span>
-                    <strong>100 (00 al 99)</strong>
+                    <strong>100 (1 al 100)</strong>
                 </div>
                 <div class="dato-resumen">
                     <span>Dinámica</span>
@@ -40,7 +40,7 @@
             <h2>📌 Reglas y dinámica del sorteo</h2>
             <ul class="lista-reglas">
                 <li>
-                    <strong>Fase 1 (10 Mini-Rifas):</strong> Los 100 números se agruparán por decenas (00-09, 10-19, 20-29... hasta el 90-99). De cada grupo de 10 boletos se elegirá 1 finalista.
+                    <strong>Fase 1 (10 Mini-Rifas):</strong> Los 100 números se agruparán por decenas (1-10, 11-20, 21-30... hasta el 91-100). De cada grupo de 10 boletos se elegirá 1 finalista.
                 </li>
                 <li>
                     <strong>Estrategia:</strong> Si adquieres varios boletos, puedes escogerlos en distintas decenas para competir en diferentes mini-rifas simultáneamente.
@@ -55,6 +55,17 @@
             <p class="cierre-reglas">
                 📲 ¿Quieres el tuyo? Selecciona tus números aquí abajo (o comenta el número que deseas / envíame inbox o WhatsApp) para confirmar y recibir los datos de pago. <strong>¡Mucha suerte a todos! 🍀</strong>
             </p>
+        </section>
+
+        <!-- Apartado de Links de Sorteos -->
+        <section class="sorteos-card" aria-label="Links de los sorteos en vivo">
+            <div class="sorteos-header">
+                <h2>🎟️ Links de los Sorteos</h2>
+                <span class="sorteos-sub">Haz clic en un sorteo activo para ver la proyección</span>
+            </div>
+            <div id="grid-links-sorteos" class="grid-links-sorteos">
+                <!-- Boletitos de Sorteo 1 al 10 + Gran Sorteo generados desde script.js -->
+            </div>
         </section>
 
         <!-- Barra de estado y selección múltiple -->
@@ -72,13 +83,13 @@
             </div>
         </section>
 
-        <!-- 10 Decenas / Mini-rifas -->
+        <!-- 10 Decenas / Mini-rifas (1 al 100) -->
         <main id="contenedor-decenas" class="contenedor-decenas">
             <!-- Generado con JavaScript -->
         </main>
     </div>
 
-    <!-- Barra flotante inferior en móvil/escritorio cuando hay boletos seleccionados -->
+    <!-- Barra flotante inferior cuando hay boletos seleccionados -->
     <div id="barra-flotante" class="barra-flotante oculto">
         <div>
             <span id="flotante-cantidad">0 boletos</span>
