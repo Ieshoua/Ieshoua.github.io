@@ -3,54 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venta de Boletos - Rifa</title>
+    <title>Gran Rifa de Audífonos — $50 MXN</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header>
-        <h1>Gran Rifa</h1>
-        <p>Selecciona tu boleto disponible (00 al 99) para apartarlo</p>
-        <div class="leyenda">
-            <span class="badge disponible">Disponible</span>
-            <span class="badge vendido">No disponible</span>
-        </div>
-    </header>
+    <div class="envoltorio">
+        <!-- Encabezado y presentación del premio -->
+        <header class="encabezado">
+            <span class="etiqueta-superior">EDICIÓN ESPECIAL • $50 POR BOLETO</span>
+            <h1>🎧 ¡Gran Rifa de Audífonos! 🎶</h1>
+            <p class="lead">¡Participa por solo <strong>$50 pesos</strong>! No dejes pasar la oportunidad de ganarte estos increíbles audífonos. La dinámica está diseñada para que tengas más posibilidades de llegar hasta el último sorteo.</p>
 
-    <main>
-        <div id="grid-boletos" class="grid-boletos">
-            <!-- Los 100 boletos se generan automáticamente con JavaScript -->
-        </div>
-    </main>
-
-    <!-- Modal de confirmación y datos de pago -->
-    <div id="modal-compra" class="modal oculto">
-        <div class="modal-contenido">
-            <span id="cerrar-modal" class="cerrar">&times;</span>
-            <h2>Confirmar Boleto <span id="numero-seleccionado">#00</span></h2>
-            
-            <div class="campo-nombre">
-                <label for="nombre-comprador">Tu nombre completo:</label>
-                <input type="text" id="nombre-comprador" placeholder="Ej. Juan Pérez">
+            <div class="marco-premio">
+                <img src="premio.jpg" alt="Audífonos inalámbricos en su estuche y caja">
             </div>
 
-            <div class="datos-bancarios">
-                <h3>Datos para Transferencia / Depósito</h3>
-                <p><strong>Banco:</strong> BBVA</p>
-                <p><strong>Beneficiario:</strong> LEONEL IESHOUA DIAZ MARTINEZ</p>
-                <p><strong>Cuenta / Tarjeta:</strong> <span id="num-cuenta">4152313861401904</span></p>
-                
-                <div class="acciones-pago">
-                    <button id="btn-copiar" class="btn-secundario">Copiar número de cuenta</button>
-                    <a href="https://www.bbva.mx/" target="_blank" rel="noopener noreferrer" class="btn-banco">Ir a portal BBVA</a>
+            <div class="resumen-rapido">
+                <div class="dato-resumen">
+                    <span>Precio por boleto</span>
+                    <strong>$50 MXN</strong>
+                </div>
+                <div class="dato-resumen">
+                    <span>Total de boletos</span>
+                    <strong>100 (00 al 99)</strong>
+                </div>
+                <div class="dato-resumen">
+                    <span>Dinámica</span>
+                    <strong>10 Mini-Rifas + Final</strong>
                 </div>
             </div>
+        </header>
 
-            <div class="acciones-finales">
-                <a id="btn-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
-                    Confirmar y enviar por WhatsApp
-                </a>
+        <!-- Reglas y dinámica del sorteo -->
+        <section class="reglas-card" aria-label="Reglas y dinámica del sorteo">
+            <h2>📌 Reglas y dinámica del sorteo</h2>
+            <ul class="lista-reglas">
+                <li>
+                    <strong>Fase 1 (10 Mini-Rifas):</strong> Los 100 números se agruparán por decenas (00-09, 10-19, 20-29... hasta el 90-99). De cada grupo de 10 boletos se elegirá 1 finalista.
+                </li>
+                <li>
+                    <strong>Estrategia:</strong> Si adquieres varios boletos, puedes escogerlos en distintas decenas para competir en diferentes mini-rifas simultáneamente.
+                </li>
+                <li>
+                    <strong>Fase 2 (Sorteo Final):</strong> Con los 10 finalistas seleccionados de cada decena, se realizará una última rifa para definir al ganador oficial de los audífonos.
+                </li>
+                <li>
+                    <strong>Condición:</strong> El sorteo se realizará una vez que se hayan liquidado todos los boletos.
+                </li>
+            </ul>
+            <p class="cierre-reglas">
+                📲 ¿Quieres el tuyo? Selecciona tus números aquí abajo (o comenta el número que deseas / envíame inbox o WhatsApp) para confirmar y recibir los datos de pago. <strong>¡Mucha suerte a todos! 🍀</strong>
+            </p>
+        </section>
+
+        <!-- Barra de estado y selección múltiple -->
+        <section class="barra-seleccion">
+            <div class="leyenda">
+                <span class="item-leyenda"><i class="punto verde"></i> Disponible</span>
+                <span class="item-leyenda"><i class="punto dorado"></i> Seleccionado</span>
+                <span class="item-leyenda"><i class="punto gris"></i> Apartado</span>
             </div>
+
+            <div class="resumen-seleccion">
+                <span id="contador-boletos">0 boletos seleccionados</span>
+                <strong id="total-pagar">$0 MXN</strong>
+                <button id="btn-abrir-modal" class="btn-principal" disabled>Continuar</button>
+            </div>
+        </section>
+
+        <!-- 10 Decenas / Mini-rifas -->
+        <main id="contenedor-decenas" class="contenedor-decenas">
+            <!-- Generado con JavaScript -->
+        </main>
+    </div>
+
+    <!-- Barra flotante inferior en móvil/escritorio cuando hay boletos seleccionados -->
+    <div id="barra-flotante" class="barra-flotante oculto">
+        <div>
+            <span id="flotante-cantidad">0 boletos</span>
+            <strong id="flotante-total">$0 MXN</strong>
+        </div>
+        <div class="flotante-acciones">
+            <button id="btn-limpiar" class="btn-texto">Limpiar</button>
+            <button id="btn-flotante-continuar" class="btn-principal">Apartar boletos</button>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación y datos de transferencia -->
+    <div id="modal-compra" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-modal">
+        <div class="modal-caja">
+            <button id="cerrar-modal" class="btn-cerrar" aria-label="Cerrar">&times;</button>
+
+            <span class="etiqueta-modal">CONFIRMACIÓN DE APARTADO</span>
+            <h2 id="titulo-modal">Resumen de tu selección</h2>
+
+            <div class="resumen-modal">
+                <p><strong>Boletos elegidos:</strong> <span id="lista-boletos-modal">—</span></p>
+                <p><strong>Mini-rifas cubiertas:</strong> <span id="rifas-cubiertas-modal">—</span></p>
+                <p class="total-destacado"><strong>Total a pagar:</strong> <span id="total-modal">$0 MXN</span></p>
+            </div>
+
+            <div class="campo">
+                <label for="nombre-comprador">Tu nombre completo</label>
+                <input type="text" id="nombre-comprador" placeholder="Ej. Sofía Ramírez">
+            </div>
+
+            <div class="banco-box">
+                <h3>Datos para transferencia / depósito</h3>
+                <p><strong>Banco:</strong> BBVA</p>
+                <p><strong>Titular:</strong> LEONEL IESHOUA DIAZ MARTINEZ</p>
+                <p><strong>Cuenta / Tarjeta:</strong> <code id="num-cuenta">4152313861401904</code></p>
+                <button type="button" id="btn-copiar" class="btn-copiar">Copiar número de cuenta</button>
+            </div>
+
+            <a id="btn-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                Enviar solicitud por WhatsApp
+            </a>
         </div>
     </div>
 
