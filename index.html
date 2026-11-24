@@ -1,34 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venta de Boletos - Rifa</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Tarjeta Ieshoua</title>
 </head>
 <body>
-    <!--Cajita 1-->
-    <div class="Cajita1">
-        <div class="Cajita1_1">
-            <div class="Circulote">
-                <!--imagen-->            
-                <img src="./get.jpeg" alt="Foto xd">
-           </div>
+
+    <header>
+        <h1>Gran Rifa</h1>
+        <p>Selecciona tu boleto disponible (00 al 99) para apartarlo</p>
+        <div class="leyenda">
+            <span class="badge disponible">Disponible</span>
+            <span class="badge vendido">No disponible</span>
         </div>
-            <!--Textoooooo-->
-            <div class="eltexto">
-                <h1>Leonel Ieshoua</h1>
-                <h1>Díaz Martínez</h1>
-                <h2> Egresado de la UTCH Cantera</h2>
-                <p>Ingeniero Mecatronico especializado en automatización</p>
+    </header>
+
+    <main>
+        <div id="grid-boletos" class="grid-boletos">
+            <!-- Los 100 boletos se generan automáticamente con JavaScript -->
         </div>
-            <!--Botones y links papu-->
-            <div id="LINKS">
-                <a href="https://www.instagram.com/ieshoua23/">Instagram</a>
-                <a href="https://wa.me/qr/GNKE3343SUA6D1">WhatsApp</a>
-                <a href="https://github.com/Ieshoua">GitHub</a>
+    </main>
+
+    <!-- Modal de confirmación y datos de pago -->
+    <div id="modal-compra" class="modal oculto">
+        <div class="modal-contenido">
+            <span id="cerrar-modal" class="cerrar">&times;</span>
+            <h2>Confirmar Boleto <span id="numero-seleccionado">#00</span></h2>
+            
+            <div class="campo-nombre">
+                <label for="nombre-comprador">Tu nombre completo:</label>
+                <input type="text" id="nombre-comprador" placeholder="Ej. Juan Pérez">
+            </div>
+
+            <div class="datos-bancarios">
+                <h3>Datos para Transferencia / Depósito</h3>
+                <p><strong>Banco:</strong> BBVA</p>
+                <p><strong>Beneficiario:</strong> LEONEL IESHOUA DIAZ MARTINEZ</p>
+                <p><strong>Cuenta / Tarjeta:</strong> <span id="num-cuenta">4152313861401904</span></p>
+                
+                <div class="acciones-pago">
+                    <button id="btn-copiar" class="btn-secundario">Copiar número de cuenta</button>
+                    <a href="https://www.bbva.mx/" target="_blank" rel="noopener noreferrer" class="btn-banco">Ir a portal BBVA</a>
+                </div>
+            </div>
+
+            <div class="acciones-finales">
+                <a id="btn-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                    Confirmar y enviar por WhatsApp
+                </a>
             </div>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
