@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // BOLETOS VENDIDOS / APARTADOS (números del 1 al 100): ej. [1, 5, 23]
     const boletosVendidosIniciales = [];
 
-    let boletosOcupados = JSON.parse(localStorage.getItem("boletosOcupados_1_100")) || boletosVendidosIniciales;
+    let boletosOcupados = [...boletosVendidosIniciales];
     let boletosSeleccionados = [];
 
     function obtenerNumeroRifa(numero) {
@@ -160,12 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     btnWhatsapp.addEventListener("click", () => {
-        boletosSeleccionados.forEach((num) => {
-            if (!boletosOcupados.includes(num)) {
-                boletosOcupados.push(num);
-            }
-        });
-        localStorage.setItem("boletosOcupados_1_100", JSON.stringify(boletosOcupados));
         boletosSeleccionados = [];
         actualizarResumenSeleccion();
         renderizarCuadricula();
