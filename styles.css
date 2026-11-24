@@ -362,14 +362,12 @@ body {
 }
 
 .boleto {
-    position: relative;
     aspect-ratio: 1 / 1;
     border: none;
     border-radius: 8px;
     font-weight: 700;
     font-size: 0.92rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: transform 0.14s ease, background-color 0.16s ease, box-shadow 0.16s ease;
@@ -403,26 +401,6 @@ body {
     color: #64748b;
     cursor: not-allowed;
     text-decoration: line-through;
-}
-
-/* Ganador -> Corona destacada */
-.boleto.ganador {
-    background: linear-gradient(160deg, #fde047 0%, #eab308 100%);
-    color: #111827;
-    cursor: default;
-    text-decoration: none;
-    box-shadow: 0 0 0 2px rgba(253, 224, 71, 0.55), 0 4px 12px rgba(234, 179, 8, 0.35);
-    padding-top: 4px;
-}
-
-.corona-boleto {
-    font-size: 0.75rem;
-    line-height: 1;
-    margin-bottom: 1px;
-}
-
-.numero-boleto {
-    line-height: 1.05;
 }
 
 /* Botones */
@@ -712,10 +690,6 @@ body {
     .boleto {
         font-size: 0.72rem;
         border-radius: 6px;
-    }
-
-    .corona-boleto {
-        font-size: 0.62rem;
     }
 
     .cabecera-decena {
