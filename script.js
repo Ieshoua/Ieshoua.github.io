@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const PRECIO_BOLETO = 50;
     const TELEFONO_WHATSAPP = "526141160875";
 
-    // CONFIGURACIÓN DE LINKS DE SORTEOS
+    // CONFIGURACIÓN DE LINKS DE SORTEOs
     // Pega cada URL dentro de las comillas conforme vayas creando cada sorteo
     const LINKS_SORTEOS = [
         {
