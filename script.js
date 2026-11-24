@@ -22,18 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnWhatsapp = document.getElementById("btn-whatsapp");
     const btnCopiar = document.getElementById("btn-copiar");
 
-    // 1. BOLETOS VENDIDOS
+    // BOLETOS VENDIDOS / APARTADOS (números del 1 al 100): ej. [1, 5, 23]
     const boletosVendidosIniciales = [];
-
-    // 2. BOLETOS GANADORES 
-    const boletosGanadores = [];
 
     let boletosOcupados = JSON.parse(localStorage.getItem("boletosOcupados_1_100")) || boletosVendidosIniciales;
     let boletosSeleccionados = [];
-
-    function esGanador(num) {
-        return boletosGanadores.includes(num);
-    }
 
     function obtenerNumeroRifa(numero) {
         return Math.ceil(numero / 10);
@@ -64,28 +57,18 @@ document.addEventListener("DOMContentLoaded", () => {
             for (let num = inicio; num <= fin; num++) {
                 const btn = document.createElement("button");
                 btn.type = "button";
+                btn.textContent = num;
                 btn.classList.add("boleto");
 
-                if (esGanador(num)) {
-                    btn.classList.add("ganador");
-                    btn.disabled = true;
-                    btn.title = `👑 Boleto #${num} Ganador`;
-                    btn.innerHTML = `
-                        <span class="corona-boleto" aria-hidden="true">👑</span>
-                        <span class="numero-boleto">${num}</span>
-                    `;
-                } else if (boletosOcupados.includes(num)) {
-                    btn.textContent = num;
+                if (boletosOcupados.includes(num)) {
                     btn.classList.add("vendido");
                     btn.disabled = true;
                     btn.title = `Boleto #${num} no disponible`;
                 } else if (boletosSeleccionados.includes(num)) {
-                    btn.textContent = num;
                     btn.classList.add("seleccionado");
                     btn.title = `Boleto #${num} seleccionado (clic para quitar)`;
                     btn.addEventListener("click", () => alternarSeleccion(num));
                 } else {
-                    btn.textContent = num;
                     btn.classList.add("disponible");
                     btn.title = `Mini-Rifa #${numeroRifa} • Boleto #${num} ($${PRECIO_BOLETO} MXN)`;
                     btn.addEventListener("click", () => alternarSeleccion(num));
@@ -100,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function alternarSeleccion(num) {
-        if (esGanador(num) || boletosOcupados.includes(num)) return;
+        if (boletosOcupados.includes(num)) return;
 
         if (boletosSeleccionados.includes(num)) {
             boletosSeleccionados = boletosSeleccionados.filter((n) => n !== num);
