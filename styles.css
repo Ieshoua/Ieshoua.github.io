@@ -3,11 +3,10 @@
     --bg-superficie: #121826;
     --bg-elevado: #182032;
     --borde-sutil: rgba(255, 255, 255, 0.09);
-    --borde-dorado: rgba(212, 175, 55, 0.35);
+    --borde-dorado: rgba(229, 193, 88, 0.4);
     --texto-principal: #f8fafc;
     --texto-secundario: #94a3b8;
     --oro: #e5c158;
-    --oro-oscuro: #b89228;
     --verde: #22c55e;
     --verde-hover: #16a34a;
     --gris: #334155;
@@ -173,6 +172,135 @@ body {
     color: var(--texto-principal);
 }
 
+/* Apartado de Links de Sorteos (estilo boletitos rectangulares) */
+.sorteos-card {
+    background: var(--bg-superficie);
+    border: 1px solid var(--borde-sutil);
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 18px;
+}
+
+.sorteos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.sorteos-header h2 {
+    font-size: 1.12rem;
+    font-weight: 600;
+}
+
+.sorteos-sub {
+    font-size: 0.8rem;
+    color: var(--texto-secundario);
+}
+
+.grid-links-sorteos {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+/* Estilo de boletito rectangular con muescas laterales */
+.ticket-sorteo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 11px 8px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px dashed var(--borde-sutil);
+    background: var(--bg-elevado);
+    color: var(--texto-secundario);
+    transition: transform 0.16s ease, border-color 0.2s ease, background-color 0.2s ease;
+    overflow: hidden;
+}
+
+/* Muescas circulares izquierda y derecha tipo boleto */
+.ticket-sorteo::before,
+.ticket-sorteo::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    background: var(--bg-superficie);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.ticket-sorteo::before {
+    left: -5px;
+    border-right: 1px solid var(--borde-sutil);
+}
+
+.ticket-sorteo::after {
+    right: -5px;
+    border-left: 1px solid var(--borde-sutil);
+}
+
+.ticket-sorteo .ticket-titulo {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.ticket-sorteo .ticket-estado {
+    font-size: 0.68rem;
+    margin-top: 2px;
+}
+
+/* Ticket con enlace activo */
+.ticket-sorteo.activo {
+    border: 1px solid var(--borde-dorado);
+    background: linear-gradient(145deg, rgba(229, 193, 88, 0.14), rgba(24, 32, 50, 0.95));
+    color: var(--texto-principal);
+    cursor: pointer;
+}
+
+.ticket-sorteo.activo .ticket-titulo {
+    color: var(--oro);
+}
+
+.ticket-sorteo.activo .ticket-estado {
+    color: #4ade80;
+    font-weight: 600;
+}
+
+.ticket-sorteo.activo:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(145deg, rgba(229, 193, 88, 0.24), rgba(24, 32, 50, 1));
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* Ticket pendiente (aún sin link) */
+.ticket-sorteo.pendiente {
+    opacity: 0.58;
+    cursor: default;
+}
+
+/* Gran Sorteo Final ocupa todo el ancho abajo */
+.ticket-sorteo.gran-sorteo {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 13px 18px;
+    border-width: 1px;
+}
+
+.ticket-sorteo.gran-sorteo .ticket-titulo {
+    font-size: 0.92rem;
+    letter-spacing: 0.6px;
+}
+
 /* Barra superior de selección */
 .barra-seleccion {
     background: var(--bg-superficie);
@@ -238,7 +366,6 @@ body {
     border: 1px solid var(--borde-sutil);
 }
 
-/* Rectángulos/fondos sutiles alternados por decena */
 .fila-decena.tono-a {
     background: linear-gradient(180deg, rgba(24, 32, 50, 0.95), rgba(15, 23, 42, 0.95));
     border-left: 3px solid rgba(229, 193, 88, 0.55);
@@ -279,11 +406,10 @@ body {
     border: none;
     border-radius: 8px;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     transition: transform 0.14s ease, background-color 0.16s ease, box-shadow 0.16s ease;
 }
 
-/* Disponible -> Verde */
 .boleto.disponible {
     background-color: var(--verde);
     color: #052e16;
@@ -296,7 +422,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Seleccionado por el usuario -> Dorado elegante */
 .boleto.seleccionado {
     background-color: var(--oro);
     color: #111827;
@@ -305,7 +430,6 @@ body {
     box-shadow: 0 0 0 2px rgba(229, 193, 88, 0.45);
 }
 
-/* Vendido / Apartado -> Gris */
 .boleto.vendido {
     background-color: var(--gris);
     color: #64748b;
@@ -564,7 +688,8 @@ body {
     }
 
     .encabezado,
-    .reglas-card {
+    .reglas-card,
+    .sorteos-card {
         padding: 20px 15px;
         border-radius: 16px;
     }
@@ -575,6 +700,11 @@ body {
 
     .resumen-rapido {
         grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .grid-links-sorteos {
+        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
 
@@ -597,7 +727,7 @@ body {
     }
 
     .boleto {
-        font-size: 0.76rem;
+        font-size: 0.72rem;
         border-radius: 6px;
     }
 
