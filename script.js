@@ -131,19 +131,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function actualizarEnlaceWhatsApp() {
         const nombre = inputNombre.value.trim();
         const total = boletosSeleccionados.length * PRECIO_BOLETO;
-        const boletosFormateados = boletosSeleccionados.map((n) => `#${n}`).join(", ");
-        const detalleRifas = boletosSeleccionados
-            .map((n) => `#${n} (Mini-Rifa #${obtenerNumeroRifa(n)})`)
-            .join(", ");
+        const boletosLineas = boletosSeleccionados.map((n) => `*#${n}*`).join("\n");
 
-        const lineaNombre = nombre ? `\n*Nombre:* ${nombre}` : "";
         const mensaje =
-            `¡Hola! Quiero apartar los siguientes boletos de la *Gran Rifa de Audífonos* ($50 c/u):` +
-            `${lineaNombre}` +
-            `\n*Boletos:* ${boletosFormateados}` +
-            `\n*Detalle por decena:* ${detalleRifas}` +
-            `\n*Total a pagar:* $${total} MXN` +
-            `\n\nEnseguida envío mi comprobante de transferencia a BBVA.`;
+            `¡Hola! Quiero apartar los siguientes boletos de la Gran Rifa de Audífonos ($50 c/u):\n\n` +
+            `Nombre: ${nombre}\n\n` +
+            `Boletos:\n` +
+            `${boletosLineas}\n\n` +
+            `Total a pagar: $${total} MXN\n\n` +
+            `Enseguida envío mi comprobante de transferencia a BBVA.`;
 
         btnWhatsapp.href = `https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
     }
