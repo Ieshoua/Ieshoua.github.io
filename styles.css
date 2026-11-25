@@ -109,7 +109,7 @@ body {
 }
 
 .dato-resumen strong {
-    font-size: 1rem;
+    font-size: 0.96rem;
     color: var(--oro);
 }
 
@@ -259,6 +259,37 @@ body {
     transform: translateY(-2px);
     background: linear-gradient(145deg, rgba(229, 193, 88, 0.25), rgba(24, 32, 50, 1));
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* Aviso de actualización y fecha de rifas */
+.aviso-boletos {
+    background: var(--bg-superficie);
+    border: 1px solid var(--borde-dorado);
+    border-left: 4px solid var(--oro);
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+}
+
+.aviso-boletos h2 {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--oro);
+    margin-bottom: 8px;
+}
+
+.aviso-boletos p {
+    font-size: 0.88rem;
+    color: #cbd5e1;
+}
+
+.aviso-boletos strong {
+    color: var(--texto-principal);
+}
+
+.aviso-fecha {
+    margin-top: 8px;
+    color: var(--texto-secundario) !important;
 }
 
 /* Barra superior de selección */
@@ -503,6 +534,8 @@ body {
     max-width: 440px;
     padding: 24px 20px;
     position: relative;
+    max-height: 92vh;
+    overflow-y: auto;
 }
 
 .btn-cerrar {
@@ -538,7 +571,7 @@ body {
     border: 1px solid var(--borde-sutil);
     border-radius: 12px;
     padding: 12px 14px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     font-size: 0.9rem;
 }
 
@@ -555,6 +588,20 @@ body {
 .total-destacado span {
     color: var(--oro);
     font-size: 1rem;
+}
+
+.aviso-modal {
+    font-size: 0.8rem;
+    color: var(--texto-secundario);
+    background: rgba(229, 193, 88, 0.07);
+    border: 1px solid var(--borde-sutil);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+}
+
+.aviso-modal strong {
+    color: var(--texto-principal);
 }
 
 .campo {
@@ -655,7 +702,8 @@ body {
 
     .encabezado,
     .reglas-card,
-    .sorteos-card {
+    .sorteos-card,
+    .aviso-boletos {
         padding: 20px 15px;
         border-radius: 16px;
     }
