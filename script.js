@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnCopiar = document.getElementById("btn-copiar");
 
     // BOLETOS VENDIDOS / APARTADOS
-    const boletosVendidosIniciales = [];
+    const boletosVendidosIniciales = [7,20];
 
     let boletosOcupados = [...boletosVendidosIniciales];
     let boletosSeleccionados = [];
